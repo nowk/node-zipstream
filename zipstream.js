@@ -77,7 +77,7 @@ ZipStream.prototype._read = function() {
     }
   }
 
-  process.nextTick(function() { self._read(); }); //TODO improve
+  setImmediate(function() { self._read(); }); //TODO improve
 }
 
 
@@ -187,7 +187,7 @@ ZipStream.prototype.addFile = function(source, file, callback) {
     }
   }
 
-  process.nextTick(function() { self._read(); });
+  setImmediate(function() { self._read(); });
 }
 
 //TODO remove listeners on end
