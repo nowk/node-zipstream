@@ -9,6 +9,12 @@ var util = require('util');
 var crc32 = require('./crc32');
 
 
+/*
+ * expose ZipStream
+ */
+
+module.exports = ZipStream;
+
 function ZipStream(opt) {
   var self = this;
 
@@ -25,9 +31,6 @@ function ZipStream(opt) {
 
 util.inherits(ZipStream, stream.Stream);
 
-exports.createZip = function(opt) {
-  return new ZipStream(opt);
-}
 
 // converts datetime to DOS format
 function convertDate(d) {
