@@ -72,7 +72,7 @@ ZipStream.prototype._read = function() {
   }
 
   if (self.eof && self.queue.length === 0) {
-    self.emit('end');
+    self.emit('end', self.fileptr);
     self.readable = false;
 
     if (self.callback) {
