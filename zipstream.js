@@ -182,10 +182,19 @@ ZipStream.prototype.addFile = function(source, file, callback) {
       // Assume stream
       source.on('data', function(chunk) {
         update(chunk);
-        deflate.write(chunk); //TODO check for false & wait for drain
+
+        // manage backpressure
+        if (!deflate.write(chunk)) {
+          source.pause();
+        }
       });
+
       source.on('end', function() {
         deflate.end();
+      });
+
+      deflate.on('drain', function() {
+        source.resume();
       });
     }
   }
